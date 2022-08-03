@@ -4,10 +4,7 @@ import random
 import time
 import logging
 import threading
-import timerscript
 from tkinter import *
-
-timerscipt.timer()
 
 def thread_function(name,qno=[],lines=[]):
     if name == 1:
@@ -41,9 +38,9 @@ def thread_function(name,qno=[],lines=[]):
         return points
 
 def run_game():
-    
+
     root = Tk()
-    
+
     # CASH BUILDER
     with open('cash_builder_qns.txt') as f:
         lines = f.read().splitlines()
@@ -59,8 +56,10 @@ def run_game():
     
     logging.info("Main    : before creating thread")
     x = threading.Thread(target=thread_function, args=(1,qno,lines))
+
     logging.info("Main    : before running thread")
     x.start()
+
     logging.info("Main    : wait for the thread to finish")
     
     second = StringVar()
