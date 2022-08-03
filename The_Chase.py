@@ -6,6 +6,8 @@ import logging
 import threading
 from tkinter import *
 
+#TODO: Make point system for each player
+
 def thread_function(name,qno=[],lines=[]):
     if name == 1:
         logging.info("Thread %s: starting", name)
@@ -39,12 +41,9 @@ def thread_function(name,qno=[],lines=[]):
 
 def run_game():
 
-    root = Tk()
-
     # CASH BUILDER
     with open('cash_builder_qns.txt') as f:
         lines = f.read().splitlines()
-
 
     # Generate questions
     qno = random.sample(range(len(lines)), 15)
@@ -62,6 +61,8 @@ def run_game():
 
     logging.info("Main    : wait for the thread to finish")
     
+    root = Tk()
+
     second = StringVar()
     timer = Label(textvariable = second, font = ('Times New Roman', 40))
     second.set("60")
