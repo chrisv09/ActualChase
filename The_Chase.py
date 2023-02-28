@@ -37,8 +37,6 @@ def thread_function(name,qno=[],lines=[]):
             
         logging.info("Thread %s: finishing", name)
 
-        return points
-
 def run_game():
 
     # CASH BUILDER
@@ -69,14 +67,14 @@ def run_game():
 
     timer.pack()
 
-    for i in range(1, 5):
-        second.set("Starting in" + str(5 - i))
+    for i in range(1, 10):
+        second.set("Starting in" + str(10 - i))
         root.update()
         time.sleep(1)
     
-    for i in range(0,10):
+    for i in range(0,60):
         # Temporary timer (will use tkinter to display)
-        second.set(str(10 - i))
+        second.set(str(60 - i))
         root.update()
         time.sleep(1)
     
