@@ -10,6 +10,7 @@ from tkinter import *
 
 def thread_function(name,qno=[],lines=[]):
     if name == 1:
+
         logging.info("Thread %s: starting", name)
 
         # Wait for enter button to start
@@ -18,14 +19,17 @@ def thread_function(name,qno=[],lines=[]):
 
         global points
         points = 0
+        i = 0
 
-        # Go through questions
-        for i in qno:
+        # Go through cash builder questions
+        while finish == False:
+
             print(lines[i])
             stop = input('')
 
             # Stop if 's' is inputted
-            if stop == 's':
+            if stop == 's' or finish == True:
+                print("Final points: " + str(points))
                 break
 
             # Give a point if 'a' is inputted
@@ -34,10 +38,14 @@ def thread_function(name,qno=[],lines=[]):
                 print(points)
             else:
                 pass
+
+            i += 1
             
         logging.info("Thread %s: finishing", name)
 
 def run_game():
+    global finish
+    finish = False
 
     # CASH BUILDER
     with open('cash_builder_qns.txt') as f:
@@ -80,6 +88,7 @@ def run_game():
     
     second.set("0")
 
+    finish = True
     x.join()
 
     print('Points (From main thread): ' + str(points))
