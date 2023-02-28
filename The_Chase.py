@@ -4,6 +4,7 @@ import random
 import time
 import logging
 import threading
+import pyautogui
 from tkinter import *
 
 #TODO: Make point system for each player
@@ -21,10 +22,12 @@ def thread_function(name,qno=[],lines=[]):
         points = 0
         i = 0
 
+        print(lines[i])
+
         # Go through cash builder questions
         while finish == False:
 
-            print(lines[i])
+            
             stop = input('')
 
             # Stop if 's' is inputted
@@ -40,12 +43,17 @@ def thread_function(name,qno=[],lines=[]):
                 pass
 
             i += 1
+            print(lines[i])
             
         logging.info("Thread %s: finishing", name)
 
 def run_game():
     global finish
     finish = False
+
+    # SETTINGS
+    TIME_BEFORE_START = 1
+    CASH_BUILDER_TIMER = 10
 
     # CASH BUILDER
     with open('cash_builder_qns.txt') as f:
@@ -75,21 +83,29 @@ def run_game():
 
     timer.pack()
 
-    for i in range(1, 10):
-        second.set("Starting in" + str(10 - i))
+    for i in range(1, TIME_BEFORE_START):
+        second.set("Starting in" + str(TIME_BEFORE_START - i))
         root.update()
         time.sleep(1)
     
-    for i in range(0,60):
+    for i in range(0,CASH_BUILDER_TIMER):
         # Temporary timer (will use tkinter to display)
-        second.set(str(60 - i))
+        second.set(str(CASH_BUILDER_TIMER - i))
         root.update()
         time.sleep(1)
     
     second.set("0")
+    root.update()
 
+    
+    
     finish = True
+
+    # Automatically press enter
+    pyautogui.press('enter')
     x.join()
+
+    
 
     print('Points (From main thread): ' + str(points))
     
