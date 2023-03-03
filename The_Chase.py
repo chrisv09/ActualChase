@@ -101,8 +101,9 @@ def run_game():
     
     finish = True
 
-    # Automatically press enter
+    # Automatically press enter to finish
     pyautogui.press('enter')
+
     x.join()
 
     
